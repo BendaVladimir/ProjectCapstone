@@ -10,9 +10,6 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
 Imports: 
-    knitr,
-    rmarkdown,
-    testthat (>= 3.0.0),
     dplyr,
     leaflet,
     ggplot2,
@@ -20,5 +17,9 @@ Imports:
     readr,
     stringr,
     tidyr
+Depends:
+    knitr,
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
 Config/testthat/edition: 3
