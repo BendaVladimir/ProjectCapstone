@@ -11,10 +11,10 @@ eq_location_clean(dataframe)
 }
 \description{
 Function will be used to transform column LOCATION_NAME to clean form.
-First part of process is removing COUNTRY from LOCATION_NAME with function 
+First part of process is removing COUNTRY from LOCATION_NAME with function
 str_remove_all.
 Secund part is transforming LOCATION_NAME to title caps.
-Final part of function str_remove_all is used to replace : and ; 
+Final part of function str_remove_all is used to replace : and ;
 in LOCATION_NAME to clean string.
 }
 \examples{

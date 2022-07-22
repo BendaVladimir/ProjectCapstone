@@ -7,16 +7,16 @@
 eq_clean_data(dataframe)
 }
 \arguments{
-\item{x}{A numeric vector of values}
+\item{datataframe}{Dataframe of loaded NOAA data}
 }
 \description{
-This function used to clean data from NOAA. File is loaded to dataframe from 
+This function used to clean data from NOAA. File is loaded to dataframe from
 TSV file in gz file. first part of function is used to create bce variable,
-which is used to determine which function will be used to transform to data. 
-In case that there is a negative sign then parse_bce_ymd will be used to transform 
-date variable. YEAR, MONTH and DAY will be transformed to string character and padded 
+which is used to determine which function will be used to transform to data.
+In case that there is a negative sign then parse_bce_ymd will be used to transform
+date variable. YEAR, MONTH and DAY will be transformed to string character and padded
 to have format YYYY MM DD. Creation of date is dependent on bce variable. If bce
-variable is TRUE then parse_bce_ymd function will be used. 
+variable is TRUE then parse_bce_ymd function will be used.
 Final part of function is used to transform LATITUDE and LONGITUDE to numerical
 format.
 }
