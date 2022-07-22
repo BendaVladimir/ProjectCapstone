@@ -13,7 +13,7 @@ globalVariables(c("COUNTRY", "DAY", "LATITUDE", "LOCATION_NAME", "LONGITUDE", "M
 #' format.
 #'
 #'
-#' @param datataframe Dataframe of loaded NOAA data
+#' @param dataframe Dataframe of loaded NOAA data
 #' @export
 #' @examples
 #' \dontrun{

@@ -7,7 +7,7 @@
 eq_clean_data(dataframe)
 }
 \arguments{
-\item{datataframe}{Dataframe of loaded NOAA data}
+\item{dataframe}{Dataframe of loaded NOAA data}
 }
 \description{
 This function used to clean data from NOAA. File is loaded to dataframe from
