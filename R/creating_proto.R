@@ -136,6 +136,7 @@ geom_timeline_label <- function(mapping = NULL,
 }
 
 
+#'Funcion for annotating data for eartquake data from NOAA.
 GeomTimeLineAnnotation <- ggplot2::ggproto("GeomTimeLineAnnotation", ggplot2::Geom,
                                            #<character vector of required aesthetics>
                                            required_aes = c("x", "tags"),
