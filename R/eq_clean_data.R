@@ -13,7 +13,7 @@ globalVariables(c("COUNTRY", "DAY", "LATITUDE", "LOCATION_NAME", "LONGITUDE", "M
 #' format.
 #'
 #'
-#' @param x A numeric vector of values
+#' @param datataframe dataframe of loaded NOAA data
 #' @export
 #' @examples
 #' \dontrun{
