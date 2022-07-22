@@ -9,7 +9,7 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
-Suggests: 
+Imports: 
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
