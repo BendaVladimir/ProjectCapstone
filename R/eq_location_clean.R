@@ -21,7 +21,7 @@ globalVariables(c("COUNTRY", "DAY", "LATITUDE", "LOCATION_NAME", "LONGITUDE", "M
 #'
 eq_location_clean <- function(dataframe) {
   dataframe %>%
-    dplyr::mutate(LOCATION_NAME = stringr::str_replace_all(stringr::str_replace_all(stringr::str_to_title(stringr::str_replace_all(LOCATION_NAME, COUNTRY, "")),":"," "), "; ", ""),
+    dplyr::mutate(LOCATION_NAME = stringr::str_trim(stringr::str_replace_all(stringr::str_replace_all(stringr::str_to_title(stringr::str_replace_all(LOCATION_NAME, COUNTRY, "")),":"," "), "; ", "")),
            LOCATION_NAME = ifelse(LOCATION_NAME == "", paste("Only country is present:",stringr::str_to_title(COUNTRY)), LOCATION_NAME)
     )
 }
