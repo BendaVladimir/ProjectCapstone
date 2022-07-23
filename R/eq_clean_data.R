@@ -1,4 +1,4 @@
-globalVariables(c("COUNTRY", "DAY", "LATITUDE", "LOCATION_NAME", "LONGITUDE", "MONTH", "YEAR" , "bce"))
+globalVariables(c("COUNTRY", "DAY", "LATITUDE", "LOCATION_NAME", "LONGITUDE", "MONTH", "YEAR" , "bce", "%>%"))
 
 #' Function is run to clean data from NOAA and transforms to prescribed form
 #'
@@ -24,7 +24,7 @@ globalVariables(c("COUNTRY", "DAY", "LATITUDE", "LOCATION_NAME", "LONGITUDE", "M
 #'
 eq_clean_data <- function(dataframe) {
   dataframe %>%
-    mutate(bce = grepl("-",as.character(YEAR)),
+    dplyr::mutate(bce = grepl("-",as.character(YEAR)),
            YEAR = stringr::str_pad(as.character(stringr::str_replace(tidyr::replace_na(YEAR,0),"-","")),4, side = "left", pad = "0"),
            MONTH = stringr::str_pad(as.character(tidyr::replace_na(MONTH,1)),2, side = "left", pad = "0"),
            DAY = stringr::str_pad(as.character(tidyr::replace_na(DAY,1)),2, side = "left", pad = "0"),

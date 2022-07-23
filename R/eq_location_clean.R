@@ -1,4 +1,4 @@
-globalVariables(c("COUNTRY", "DAY", "LATITUDE", "LOCATION_NAME", "LONGITUDE", "MONTH", "YEAR" , "bce"))
+globalVariables(c("COUNTRY", "DAY", "LATITUDE", "LOCATION_NAME", "LONGITUDE", "MONTH", "YEAR" , "bce", "%>%"))
 
 #' Cleaning variable LOCATION_NAME from inclusion of COUNTRY
 #'

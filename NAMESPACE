@@ -1,2 +1,4 @@
 exportPattern("^[^\\.]")
-#import("ggplot2")
+import("knitr")
+import("rmarkdown")
+import("testthat")
