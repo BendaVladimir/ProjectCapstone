@@ -14,10 +14,10 @@ globalVariables(c("%>%"))
 #' filename<-system.file("data","earthquakes.tsv.gz",package="ProjectCapstone")
 #' dataframe <- read_delim(filename) %>%
 #' eq_location_clean(eq_clean_data(dataframe)) %>%
-#' dplyr::filter(datetime >= "1980-01-01" & datetime <="2014-01-01"
+#' dplyr::filter(date >= "1980-01-01" & date <="2014-01-01"
 #' & COUNTRY == c("MEXICO","USA", "JORDAN"))%>%
 #' ggplot() +
-#' geom_timeline(aes(x = datetime, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS))
+#' geom_timeline(aes(x = date, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS))
 #' }
 #'
 #' @export
@@ -110,11 +110,11 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
 #' filename<-system.file("data","earthquakes.tsv.gz",package="ProjectCapstone")
 #' dataframe <- read_delim(filename) %>%
 #' eq_location_clean(eq_clean_data(dataframe)) %>%
-#' dplyr::filter(datetime >= "1980-01-01" & datetime <="2014-01-01"
+#' dplyr::filter(date >= "1980-01-01" & date <="2014-01-01"
 #' & COUNTRY == c("MEXICO","USA", "JORDAN"))%>%
 #' ggplot() +
-#' geom_timeline(aes(x = datetime, y = COUNTRY, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS)) +
-#' geom_timeline_label(aes(x = datetime, y = COUNTRY,
+#' geom_timeline(aes(x = date, y = COUNTRY, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS)) +
+#' geom_timeline_label(aes(x = date, y = COUNTRY,
 #' label = LOCATION_NAME, number = 3, max_aes = EQ_MAG_ML))
 #'}
 #'
@@ -210,23 +210,23 @@ GeomTimeLineAnnotation <- ggplot2::ggproto("GeomTimeLineAnnotation", ggplot2::Ge
 #' filename<-system.file("data","earthquakes.tsv.gz",package="ProjectCapstone")
 #' dataframe <- read_delim(filename) %>%
 #' eq_location_clean(eq_clean_data(dataframe)) %>%
-#' dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(datetime) >= 1980) %>%
-#' eq_map(annot_col = "datetime")
+#' dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 1980) %>%
+#' eq_map(annot_col = "date")
 #' }
 #'
 #' @export
-eq_map <- function(eq_clean=NULL, annot_col="datetime"){
+eq_map <- function(eq_clean=NULL, annot_col="date"){
 
   #test that correct columns are present
   all_columns <- colnames(eq_clean)
 
-  stopifnot(any('datetime' %in% all_columns),any('LATITUDE' %in% all_columns),
+  stopifnot(any('date' %in% all_columns),any('LATITUDE' %in% all_columns),
             any('LONGITUDE' %in% all_columns),any('EQ_MAG_ML' %in% all_columns))
 
   #check to see if invalid column provided - print message and default to DATE
   if(!(any(annot_col %in% all_columns))) {
     warning("Invalid Column - DATE Displayed")
-    annot_col = "datetime"
+    annot_col = "date"
   }
 
   #call to leaflet
@@ -249,7 +249,7 @@ eq_map <- function(eq_clean=NULL, annot_col="datetime"){
 #' filename<-system.file("data","earthquakes.tsv.gz",package="ProjectCapstone")
 #' dataframe <- read_delim(filename) %>%
 #' eq_location_clean(eq_clean_data(dataframe)) %>%
-#' dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(datetime) >= 1980) %>%
+#' dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 1980) %>%
 #' dplyr::mutate(popup_text = eq_create_label(.)) %>%
 #'  eq_map(annot_col = "popup_text")
 #' }
@@ -264,10 +264,10 @@ eq_create_label <- function(eq_clean=NULL) {
             any('DEATHS' %in% all_columns))
 
   #Creating the "popup_text" without using NA Labels
-  data2<- eq_clean %>% dplyr::select_(.dots=c('LOCATION_NAME','EQ_MAG_ML','DEATHS')) %>%
-    dplyr::mutate(new_LOCATION_NAME = ~ ifelse(is.na(LOCATION_NAME), LOCATION_NAME, paste0("<b>Location:</b> ", LOCATION_NAME,"<br />"))) %>%
-    dplyr::mutate(new_EQ_PRIMARY = ~ ifelse(is.na(EQ_MAG_ML), EQ_MAG_ML, paste0("<b>Magnitude:</b> ", EQ_MAG_ML,"<br />"))) %>%
-    dplyr::mutate(new_DEATHS = ~ ifelse(is.na(DEATHS), DEATHS, paste0("<b>Total Deaths:</b> ", DEATHS))) %>%
+  data2<- eq_clean %>% dplyr::select(.dots=c('LOCATION_NAME','EQ_MAG_ML','DEATHS')) %>%
+    dplyr::mutate(new_LOCATION_NAME = ifelse(is.na(eq_clean$LOCATION_NAME), eq_clean$LOCATION_NAME, paste0("<b>Location:</b> ", eq_clean$LOCATION_NAME,"<br />"))) %>%
+    dplyr::mutate(new_EQ_PRIMARY = ifelse(is.na(eq_clean$EQ_MAG_ML), eq_clean$EQ_MAG_ML, paste0("<b>Magnitude:</b> ", eq_clean$EQ_MAG_ML,"<br />"))) %>%
+    dplyr::mutate(new_DEATHS = ifelse(is.na(eq_clean$DEATHS), eq_clean$DEATHS, paste0("<b>Total Deaths:</b> ", eq_clean$DEATHS))) %>%
     tidyr::unite('popup_values',c('new_LOCATION_NAME','new_EQ_PRIMARY','new_DEATHS'),sep ='') %>%
     dplyr::mutate(popup_values = ~ stringr::str_replace_all(popup_values,"[,]*NA[,]*","")) %>%
     dplyr::mutate(popup_values = ~ ifelse(popup_values=="","All Values are NA",popup_values))

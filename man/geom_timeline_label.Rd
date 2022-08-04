@@ -43,11 +43,11 @@ Funcion for adding the Eartquakes's Location labels to an Earthquake's timeline
 filename<-system.file("data","earthquakes.tsv.gz",package="ProjectCapstone")
 dataframe <- read_delim(filename) \%>\%
 eq_location_clean(eq_clean_data(dataframe)) \%>\%
-dplyr::filter(datetime >= "1980-01-01" & datetime <="2014-01-01"
+dplyr::filter(date >= "1980-01-01" & date <="2014-01-01"
 & COUNTRY == c("MEXICO","USA", "JORDAN"))\%>\%
 ggplot() +
-geom_timeline(aes(x = datetime, y = COUNTRY, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS)) +
-geom_timeline_label(aes(x = datetime, y = COUNTRY,
+geom_timeline(aes(x = date, y = COUNTRY, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS)) +
+geom_timeline_label(aes(x = date, y = COUNTRY,
 label = LOCATION_NAME, number = 3, max_aes = EQ_MAG_ML))
 }
 

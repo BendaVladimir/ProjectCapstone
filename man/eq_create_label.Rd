@@ -20,7 +20,7 @@ This function generates HTML formatted text to be used in popups for map markers
 filename<-system.file("data","earthquakes.tsv.gz",package="ProjectCapstone")
 dataframe <- read_delim(filename) \%>\%
 eq_location_clean(eq_clean_data(dataframe)) \%>\%
-dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(datetime) >= 1980) \%>\%
+dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 1980) \%>\%
 dplyr::mutate(popup_text = eq_create_label(.)) \%>\%
  eq_map(annot_col = "popup_text")
 }

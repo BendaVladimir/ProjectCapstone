@@ -43,10 +43,10 @@ Function that will use the GeomTimeLine Prototype Function required to Plot a Ti
 filename<-system.file("data","earthquakes.tsv.gz",package="ProjectCapstone")
 dataframe <- read_delim(filename) \%>\%
 eq_location_clean(eq_clean_data(dataframe)) \%>\%
-dplyr::filter(datetime >= "1980-01-01" & datetime <="2014-01-01"
+dplyr::filter(date >= "1980-01-01" & date <="2014-01-01"
 & COUNTRY == c("MEXICO","USA", "JORDAN"))\%>\%
 ggplot() +
-geom_timeline(aes(x = datetime, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS))
+geom_timeline(aes(x = date, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS))
 }
 
 }
